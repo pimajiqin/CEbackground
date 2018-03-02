@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load mytags %}
+{% block title %}
+    CE 海外 daily_total
+{% endblock %}
+
+
+{% block content %}
+
+<section class="content-header">
+      <h1>
+        CE 海外 daily_total
+        <small>It may not be the latest reply</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">reply</a></li>
+        <li class="active">idl</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+<section class="content">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">daily_total Table</h3>
+                <div class="box-tools">
+                <ul class="pagination pagination-sm no-margin pull-right">
+{#                  <li><a href="#">&laquo;</a></li>#}
+                <li>
+                  {% ifnotequal curPage 1 %}
+                  <a href="?curPage={{ curPage }}&&allPage={{ allPage }}&&pageType=pageUp">&laquo;</a>
+                  {% endifnotequal %}
+                </li>
+{#                  <li><a href="#">1</a></li>#}
+
+                <li>
+                  <span class="current">
+                  {{ curPage }} of {{ allPage }}.
+                  </span>
+                </li>
+{#                  <li><a href="#">&raquo;</a></li>#}
+                <li>
+                    {% ifnotequal curPage allPage %}
+                    <a href="?curPage={{ curPage }}&&allPage={{ allPage }}&&pageType=pageDown">&raquo;</a>
+                    {% endifnotequal %}
+                </li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>日期</th>
+                  <th>DAU</th>
+                  <th>新增</th>
+                  <th>充值金额</th>
+                  <th>订单数</th>
+                  <th>付费人数</th>
+                  <th>ARPU</th>
+                  <th>付费率</th>
+                </tr>
+                    {% for line in user_list %}
+                        <tr>
+                        {% for i in line %}
+                        <td>{{ i }}</td>
+                        {% endfor %}
+                        <td>{% my_tag_1 line.3 line.1 %}</td>
+                        <td>{% my_tag_2 line.5 line.1 %}%</td>
+                        </tr>
+                    {% endfor %}
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+</section>
+
+
+{% endblock %}
